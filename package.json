@@ -1,0 +1,30 @@
+{
+  "name": "otm-institucion-educativa",
+  "version": "1.0.0",
+  "description": "Sistema web de Órdenes de Trabajo para Mantenimiento",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "check": "node --check server.js && node --check routes/ot.routes.js && node --check controllers/ot.controller.js && node --check services/pdf.service.js && node --check services/email.service.js && node --check services/qr.service.js && node --check public/js/form.js && node --check public/js/admin.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.0.0",
+    "mongoose": "^8.9.5",
+    "multer": "^2.4.0",
+    "nodemailer": "^10.0.14",
+    "pdfkit": "^0.16.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.10"
+  }
+}

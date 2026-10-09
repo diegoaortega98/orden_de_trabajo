@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12304a">
+  <title>Administración | OTM</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="admin-page">
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Ir al formulario público">
+      <span class="brand-mark" aria-hidden="true">OT</span>
+      <span><strong>Administración OTM</strong><small>Panel de mantenimiento</small></span>
+    </a>
+    <button id="logout-button" class="button button-secondary button-small" type="button" hidden>Cerrar sesión</button>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro admin-intro">
+      <div>
+        <p class="eyebrow">CONTROL OPERATIVO</p>
+        <h1>Órdenes de trabajo</h1>
+        <p>Consulta el estado de los trabajos y revisa las estadísticas del servicio.</p>
+      </div>
+      <a class="button button-primary" href="/" target="_blank" rel="noopener">Abrir formulario</a>
+    </section>
+
+    <section id="login-panel" class="panel login-panel">
+      <h2>Acceso administrativo</h2>
+      <p>Ingresa el token administrativo configurado en el servidor.</p>
+      <form id="login-form" class="login-form">
+        <label for="admin-token">Token</label>
+        <input id="admin-token" type="password" autocomplete="current-password" required>
+        <button class="button button-primary" type="submit">Ingresar</button>
+      </form>
+      <div id="login-message" class="notice notice-error" role="alert" hidden></div>
+    </section>
+
+    <div id="dashboard-content" hidden>
+      <section class="stats-grid" aria-label="Resumen">
+        <article class="stat-card"><span>Total de órdenes</span><strong id="stat-total">—</strong></article>
+        <article class="stat-card"><span>Pendientes de completar</span><strong id="stat-pending">—</strong></article>
+      </section>
+
+      <section class="charts-grid">
+        <article class="panel chart-card">
+          <h2>Órdenes por mes</h2>
+          <div id="chart-month" class="chart-list"></div>
+        </article>
+        <article class="panel chart-card">
+          <h2>Órdenes por área</h2>
+          <div id="chart-area" class="chart-list"></div>
+        </article>
+        <article class="panel chart-card">
+          <h2>Órdenes por técnico</h2>
+          <div id="chart-technician" class="chart-list"></div>
+        </article>
+      </section>
+
+      <section class="panel orders-panel">
+        <div class="section-heading">
+          <div><p class="eyebrow">REGISTRO</p><h2>Listado de órdenes</h2></div>
+          <button id="refresh-button" class="button button-secondary button-small" type="button">Actualizar</button>
+        </div>
+        <form id="filter-form" class="filters">
+          <label>Área<input name="area" placeholder="Filtrar por área"></label>
+          <label>Técnico<input name="tecnico" placeholder="Filtrar por técnico"></label>
+          <label>Desde<input name="desde" type="date"></label>
+          <label>Hasta<input name="hasta" type="date"></label>
+          <label>Estado
+            <select name="estado">
+              <option value="">Todos</option>
+              <option value="lista">Listas</option>
+              <option value="pendiente">Pendientes</option>
+            </select>
+          </label>
+          <div class="filter-buttons">
+            <button class="button button-primary button-small" type="submit">Filtrar</button>
+            <button id="clear-filters" class="button button-secondary button-small" type="button">Limpiar</button>
+          </div>
+        </form>
+        <div id="admin-message" class="notice" role="status" aria-live="polite" hidden></div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr>
+              <th>Número</th><th>Fecha</th><th>Área</th><th>Técnico</th><th>Tipo</th><th>Prioridad</th><th>Estado</th><th>Acciones</th>
+            </tr></thead>
+            <tbody id="orders-table"><tr><td colspan="8" class="empty-cell">Inicia sesión para cargar las órdenes.</td></tr></tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <button id="previous-page" class="button button-secondary button-small" type="button" disabled>Anterior</button>
+          <span id="page-label">Página 1</span>
+          <button id="next-page" class="button button-secondary button-small" type="button" disabled>Siguiente</button>
+        </div>
+      </section>
+      <section class="panel qr-panel">
+        <div><p class="eyebrow">ACCESO PÚBLICO</p><h2>Código QR del formulario</h2><p>Imprime o comparte este QR para abrir el formulario desde un teléfono.</p><a id="form-url" href="/" target="_blank" rel="noopener"></a></div>
+        <img id="qr-image" alt="Código QR al formulario OTM" hidden>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="detail-dialog" class="detail-dialog">
+    <div class="dialog-heading"><h2 id="detail-title">Detalle de orden</h2><button id="close-dialog" class="icon-button" type="button" aria-label="Cerrar">×</button></div>
+    <div id="detail-content" class="detail-content"></div>
+  </dialog>
+  <footer class="site-footer">Sistema de Órdenes de Trabajo para Mantenimiento</footer>
+  <script src="/js/admin.js" defer></script>
+</body>
+</html>

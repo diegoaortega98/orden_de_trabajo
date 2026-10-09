@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Check evidence changes",
+			"type": "shell",
+			"command": "npm.cmd",
+			"args": [
+				"run",
+				"check"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#12304a">
+  <title>Reporte de mantenimiento | OTM</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Inicio OTM">
+      <span class="brand-mark" aria-hidden="true">OT</span>
+      <span><strong>Servicios de mantenimiento</strong><small>Órdenes de trabajo</small></span>
+    </a>
+    <span class="header-note">Formulario de atención</span>
+  </header>
+
+  <main class="page-shell narrow-shell">
+    <section class="intro">
+      <p class="eyebrow">REGISTRO DE SERVICIO</p>
+      <h1>Orden de trabajo</h1>
+      <p>Completa la información del trabajo realizado. Los campos marcados con <span class="required">*</span> son obligatorios.</p>
+    </section>
+
+    <form id="ot-form" class="panel form-panel" enctype="multipart/form-data">
+      <section class="form-section">
+        <h2>Información de la solicitud</h2>
+        <div class="form-grid">
+          <label>Nombre del técnico <span class="required">*</span>
+            <input name="tecnico" autocomplete="name" maxlength="120" required>
+          </label>
+          <label>Área / Lugar <span class="required">*</span>
+            <input name="area" maxlength="160" placeholder="Ej. Biblioteca, aula 12" required>
+          </label>
+          <label>Solicitado por <span class="required">*</span>
+            <input name="solicitadoPor" maxlength="120" required>
+          </label>
+          <label>Correo del solicitante
+            <input name="emailSolicitante" type="email" autocomplete="email" maxlength="254">
+          </label>
+          <label>Tipo <span class="required">*</span>
+            <select name="tipo" required>
+              <option value="">Selecciona una opción</option>
+              <option>Preventivo</option>
+              <option>Correctivo</option>
+              <option>Emergencia</option>
+            </select>
+          </label>
+          <label>Prioridad <span class="required">*</span>
+            <select name="prioridad" required>
+              <option value="">Selecciona una opción</option>
+              <option>Alta</option>
+              <option>Media</option>
+              <option>Baja</option>
+            </select>
+          </label>
+          <label>Categoría <span class="required">*</span>
+            <select name="categoria" required>
+              <option value="">Selecciona una opción</option>
+              <option>Eléctrico</option>
+              <option>Plomería</option>
+              <option>Infraestructura</option>
+              <option>Mobiliario</option>
+              <option>Tecnológico</option>
+            </select>
+          </label>
+        </div>
+        <label class="spaced-label">Descripción del problema <span class="required">*</span>
+          <textarea name="descripcion" rows="4" maxlength="3000" required></textarea>
+        </label>
+      </section>
+
+      <section class="form-section">
+        <h2>Seguridad y trabajo realizado</h2>
+        <fieldset class="choice-group">
+          <legend>EPP usado</legend>
+          <div class="check-grid">
+            <label class="check-option"><input type="checkbox" name="eppUsado" value="Guantes"> Guantes</label>
+            <label class="check-option"><input type="checkbox" name="eppUsado" value="Lentes de seguridad"> Lentes de seguridad</label>
+            <label class="check-option"><input type="checkbox" name="eppUsado" value="Casco"> Casco</label>
+            <label class="check-option"><input type="checkbox" name="eppUsado" value="Mascarilla"> Mascarilla</label>
+            <label class="check-option"><input type="checkbox" name="eppUsado" value="Botas"> Botas</label>
+            <label class="check-option"><input type="checkbox" name="eppUsado" value="Protección auditiva"> Protección auditiva</label>
+            <label class="check-option"><input type="checkbox" name="eppUsado" value="Otro"> Otro</label>
+          </div>
+        </fieldset>
+        <label class="spaced-label">Trabajo realizado
+          <textarea name="trabajoRealizado" rows="4" maxlength="3000"></textarea>
+        </label>
+        <label class="spaced-label">Materiales usados
+          <textarea name="materialesUsados" rows="3" maxlength="2000" placeholder="Describe materiales y cantidades, si aplica"></textarea>
+        </label>
+        <div class="form-grid">
+          <label>Hora de inicio
+            <input name="horaInicio" type="datetime-local">
+          </label>
+          <label>Hora de fin
+            <input name="horaFin" type="datetime-local">
+          </label>
+          <label>¿Quedó listo? <span class="required">*</span>
+            <select name="quedoListo" required>
+              <option value="">Selecciona una opción</option>
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+          </label>
+        </div>
+        <label class="spaced-label">Observaciones
+          <textarea name="observaciones" rows="3" maxlength="2000"></textarea>
+        </label>
+        <div class="evidence-field">
+          <h3>Evidencias fotográficas</h3>
+          <p class="field-hint">Sube hasta 5 fotos del antes, durante o después del trabajo. JPG, PNG o HEIC. Máximo 5 MB por foto.</p>
+          <div id="evidencias-drop-zone" class="evidence-drop-zone">
+            <input type="file" name="evidencias" accept="image/jpeg,image/png,image/heic" multiple hidden id="evidencias-input">
+            <p>Arrastra y suelta tus fotos aquí</p>
+            <button type="button" id="evidencias-select" class="button button-secondary">Seleccionar archivos</button>
+          </div>
+          <p id="evidencias-error" class="evidence-error" role="alert" hidden></p>
+          <div id="evidencias-preview" class="evidence-grid" aria-live="polite"></div>
+          <p id="evidencias-count" class="field-hint">0 / 5 fotos</p>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Firma del solicitante</h2>
+        <p class="field-hint">Firma dentro del recuadro con el dedo o el mouse. Puedes borrar y volver a firmar.</p>
+        <div class="signature-wrap">
+          <canvas id="signature-pad" aria-label="Área para dibujar la firma del solicitante"></canvas>
+        </div>
+        <button type="button" id="clear-signature" class="button button-secondary button-small">Borrar firma</button>
+      </section>
+
+      <div id="form-message" class="notice" role="status" aria-live="polite" hidden></div>
+      <div class="form-actions">
+        <button type="submit" id="submit-button" class="button button-primary">Enviar orden de trabajo</button>
+        <span class="privacy-note">La información se registra para control interno de mantenimiento.</span>
+      </div>
+    </form>
+  </main>
+
+  <footer class="site-footer">Sistema de Órdenes de Trabajo para Mantenimiento</footer>
+  <script src="/js/form.js" defer></script>
+</body>
+</html>
